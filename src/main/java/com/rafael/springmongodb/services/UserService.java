@@ -1,6 +1,7 @@
 package com.rafael.springmongodb.services;
 
 import com.rafael.springmongodb.domain.User;
+import com.rafael.springmongodb.dto.UserDTO;
 import com.rafael.springmongodb.exception.ObjectNotFoundException;
 import com.rafael.springmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,9 @@ public class UserService {
     public User findById(String id) {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
