@@ -1,5 +1,6 @@
 package com.rafael.springmongodb.resources;
 
+import com.rafael.springmongodb.domain.Post;
 import com.rafael.springmongodb.domain.User;
 import com.rafael.springmongodb.dto.UserDTO;
 import com.rafael.springmongodb.services.UserService;
@@ -55,4 +56,11 @@ public class UserResource    {
         obj = service.insert(obj);
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPost(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
+
 }
